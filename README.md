@@ -2,7 +2,7 @@
 
 
 
-* Master Build Status ![master](https://img.shields.io/github/workflow/status/yankyaw004/sem/build/master?style=flat-square)
+  [master](https://img.shields.io/github/workflow/status/yankyaw004/sem/build/master?style=flat-square)
 
 * License [![LICENSE](https://img.shields.io/github/license/yankyaw004/sem.svg?style=flat-square)](https://github.com/yankyaw004/sem/blob/master/LICENSE)
 
