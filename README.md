@@ -2,9 +2,9 @@ Software engineering
 
 
 
-[![GitHub Workflow Status]](https://img.shields.io/github/actions/workflow/status/yankyaw004/sem/main.yml?branch=develop&style=flat-square)
+* Master Build Status ![Master Build Status](https://img.shields.io/github/actions/workflow/status/yankyaw004/sem/main.yml?branch=develop&style=flat-square)
 
-[![GitHub Workflow Status]](https://img.shields.io/github/actions/workflow/status/yankyaw004/sem/main.yml?branch=develop&style=flat-square)
+* Develop Build Status ![Develop Build Status](https://img.shields.io/github/actions/workflow/status/yankyaw004/sem/main.yml?branch=develop&style=flat-square)
 
 [![LICENSE](https://img.shields.io/github/license/WannaSan-Edu/sem.svg?style=flat-square)](https://github.com/WannaSan-Edu/sem/blob/main/LICENSE)
 
