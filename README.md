@@ -8,4 +8,4 @@ new Text
 
 
 # DevOps
-![CI Status](https://github.com/yankyaw004/sem/actions/workflows/main.yml/badge.svg)
+![Develop Build Status (develop)](https://img.shields.io/github/workflow/status/yankyaw004/sem/main.yml/develop?style=flat-square)
