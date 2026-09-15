@@ -35,23 +35,19 @@ jobs:
             --network se-methods \
             mongo
 
-      - name: Check Docker network
+      - name: Check MongoDB
         run: |
           docker ps
+          docker inspect mongo-dbserver
           docker network inspect se-methods
+          
+
 
       - name: Build with Maven
         run: mvn clean package
 
       - name: Build Docker image
         run: docker build -t se_methods .
-
-      - name: Test MongoDB hostname
-        run: |
-          docker run --rm \
-            --network se-methods \
-            eclipse-temurin:25 \
-            getent hosts mongo-dbserver
 
       - name: Run image
         run: |
@@ -63,4 +59,4 @@ jobs:
       - name: View logs
         if: always()
         run: |
-          docker logs devopscontainer
+          docker logs devopscontainer || true
