@@ -46,6 +46,13 @@ jobs:
       - name: Build Docker image
         run: docker build -t se_methods .
 
+      - name: Test MongoDB hostname
+        run: |
+          docker run --rm \
+            --network se-methods \
+            eclipse-temurin:25 \
+            getent hosts mongo-dbserver
+
       - name: Run image
         run: |
           docker run \
