@@ -29,19 +29,20 @@ jobs:
 
       - name: Start MongoDB
         run: |
-          docker pull mongo
+          docker pull mongo:8.0
           docker run -d \
             --name mongo-dbserver \
             --network se-methods \
-            mongo
+            mongo:8.0
+          sleep 10
 
       - name: Check MongoDB
         run: |
-          docker ps
-          docker inspect mongo-dbserver
+          docker ps -a
+          echo "===== MongoDB Logs ====="
+          docker logs mongo-dbserver
+          echo "===== Docker Network ====="
           docker network inspect se-methods
-          
-
 
       - name: Build with Maven
         run: mvn clean package
