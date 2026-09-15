@@ -61,3 +61,21 @@ jobs:
         if: always()
         run: |
           docker logs devopscontainer || true
+          
+          
+
+      - name: Updating Our System
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade -y
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Check target files
+        run: |
+          echo "===== TARGET FILES ====="
+          ls -lah target
+
+      - name: Build Docker image
+        run: docker build -t devopsimage .
