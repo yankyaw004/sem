@@ -9,26 +9,20 @@ public class App {
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
-    {
-        try
-        {
+    public void connect() {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-        }
-        catch (ClassNotFoundException e)
-        {
+        } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
         int retries = 10;
 
-        for (int i = 0; i < retries; ++i)
-        {
+        for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
 
-            try
-            {
+            try {
                 Thread.sleep(30000);
 
                 con = DriverManager.getConnection(
@@ -39,16 +33,12 @@ public class App {
 
                 System.out.println("Successfully connected");
                 break;
-            }
-            catch (SQLException sqle)
-            {
+            } catch (SQLException sqle) {
                 System.out.println(
                         "Failed to connect to database attempt " + i
                 );
                 System.out.println(sqle.getMessage());
-            }
-            catch (InterruptedException ie)
-            {
+            } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
@@ -57,16 +47,11 @@ public class App {
     /**
      * Disconnect from the MySQL database.
      */
-    public void disconnect()
-    {
-        if (con != null)
-        {
-            try
-            {
+    public void disconnect() {
+        if (con != null) {
+            try {
                 con.close();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println("Error closing connection to database");
             }
         }
@@ -76,10 +61,8 @@ public class App {
     /**
      * Get an employee from the database.
      */
-    public Employee getEmployee(int ID)
-    {
-        try
-        {
+    public Employee getEmployee(int ID) {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
@@ -93,8 +76,7 @@ public class App {
             ResultSet rset = stmt.executeQuery(strSelect);
 
             // Check if an employee was returned
-            if (rset.next())
-            {
+            if (rset.next()) {
                 Employee emp = new Employee();
 
                 emp.emp_no = rset.getInt("emp_no");
@@ -102,38 +84,41 @@ public class App {
                 emp.last_name = rset.getString("last_name");
 
                 return emp;
-            }
-            else
-            {
+            } else {
                 return null;
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get employee details");
             return null;
         }
     }
 
-    public static void main(String[] args)
-    {
+    public void displayEmployee(Employee emp) {
+        if (emp != null) {
+            System.out.println(
+                    emp.emp_no + " "
+                            + emp.first_name + " "
+                            + emp.last_name + "\n"
+                            + emp.title + "\n"
+                            + "Salary:" + emp.salary + "\n"
+                            + emp.dept_name + "\n"
+                            + "Manager: " + emp.manager + "\n");
+        }
+    }
+
+    public static void main(String[] args) {
         // Create new Application
         App a = new App();
 
         // Connect to database
         a.connect();
 
-        // Get employee
-        Employee emp = a.getEmployee(10001);
+        // Get Employee
+        Employee emp = a.getEmployee(255530);
 
-        // Display employee information
-        if (emp != null)
-        {
-            System.out.println("Employee ID: " + emp.emp_no);
-            System.out.println("First Name: " + emp.first_name);
-            System.out.println("Last Name: " + emp.last_name);
-        }
+        // Display results
+        a.displayEmployee(emp);
 
         // Disconnect from database
         a.disconnect();
