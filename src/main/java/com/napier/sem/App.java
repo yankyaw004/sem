@@ -72,6 +72,50 @@ public class App {
         }
     }
 
+
+    /**
+     * Get an employee from the database.
+     */
+    public Employee getEmployee(int ID)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT emp_no, first_name, last_name "
+                            + "FROM employees "
+                            + "WHERE emp_no = " + ID;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            // Check if an employee was returned
+            if (rset.next())
+            {
+                Employee emp = new Employee();
+
+                emp.emp_no = rset.getInt("emp_no");
+                emp.first_name = rset.getString("first_name");
+                emp.last_name = rset.getString("last_name");
+
+                return emp;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get employee details");
+            return null;
+        }
+    }
+
     public static void main(String[] args)
     {
         // Create new Application
@@ -79,6 +123,17 @@ public class App {
 
         // Connect to database
         a.connect();
+
+        // Get employee
+        Employee emp = a.getEmployee(10001);
+
+        // Display employee information
+        if (emp != null)
+        {
+            System.out.println("Employee ID: " + emp.emp_no);
+            System.out.println("First Name: " + emp.first_name);
+            System.out.println("Last Name: " + emp.last_name);
+        }
 
         // Disconnect from database
         a.disconnect();
